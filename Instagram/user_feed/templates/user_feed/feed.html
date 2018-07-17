@@ -1,0 +1,35 @@
+{% extends 'base_app/base.html' %}
+
+{% block content %}
+    <head>
+    <title>User_Feed</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style>
+        img {
+            height: 500px;
+            width: 500px;
+            -o-object-fit: contain;
+            object-fit: scale-down;
+        }
+    </style>
+    </head>
+        <div class="container-fluid">
+            <a class="button black" href="{% url 'profile' %}" style="text-decoration: none">profile</a>
+            <a class="button black" href="{% url 'search' %}" style="text-decoration: none">search</a>
+            <a class="button black" href="{% url 'logout' %}" style="text-decoration: none">logout</a>
+            {% for post in posts %}
+                <h2>{{ post.user.name }}</h2>
+                <a href="{% url 'post' pk=post.pid %}"><img src="{{ post.post_picture.url }}" /></a>
+                <h3>{{ post.description }}</h3>
+                {% if post.likes == 1 %}
+                    <h4>{{ post.likes }} like</h4>
+                {% else %}
+                    <h4>{{ post.likes }} likes</h4>
+                {% endif %}
+                <p>
+                    <a style="text-decoration: none" class="button black" href="{% url 'like' pk=post.pid %}">like</a>
+                    <a style="text-decoration: none" class="button black" href="{% url 'comment' pk=post.pid %}">comment</a>
+                </p>
+            {% endfor %}
+        </div>
+{% endblock %}

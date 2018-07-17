@@ -1,0 +1,18 @@
+{% extends 'base_app/base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Search for User</title>
+</head>
+<body>
+<h1>Profile Search</h1>
+<form method = 'post' class="search">
+    {{form.as_p}} {% csrf_token %}
+    <button type="submit" class="search">Search</button>
+</form>
+</body>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div align="center"><a href="/feed" class="button black" style="text-decoration: none">back</a></div>
+{% endblock %}

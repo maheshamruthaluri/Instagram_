@@ -1,0 +1,78 @@
+{% extends 'base_app/base.html' %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<div class="container-fluid">
+    <div class="profile">
+        <h2>{{ user.name }}</h2>
+        <!-- <h6>joined: {{ user.join_date }}</h6> -->
+        {% if user.profile_picture %}
+        <img src="{{ user.profile_picture.url }}" />
+        {% else %}
+            <img src="{{ MEDIA_URL }}/static/blank.png" />
+        {% endif %}
+        <!-- remove these buttons if user.uid not equal to cur logged in user -->
+      
+        <a class="button black" href="{% url 'feed' %}" style="text-decoration: none">feed</a> 
+        <a class="button black" href="{% url 'edit_profile' pk=user.uid %}" style="text-decoration: none">edit</a>
+        <a class="button black" href="{% url 'upload' pk=user.uid %}" style="text-decoration: none">upload</a>
+        <!-- ---------------------------------- -->
+        <a class="button black" href="{% url 'search' %}" style="text-decoration: none">search</a>
+        <a class="button black" href="{% url 'logout' %}" style="text-decoration: none">logout</a>
+        <p>{{ user.gender }}&emsp;&emsp;{{ user.age }}&emsp;&emsp;{{ user.email }}</p>
+        <p>{{ user.bio }}</p>
+        <hr>
+    </div>
+</div>
+<style>
+html {
+box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+box-sizing: inherit;
+}
+span {
+  display: inline;
+  width: 10px;
+  height: 10px;
+}
+img {
+  height: 95px;
+  width: 130px;
+  -o-object-fit: contain;
+  object-fit: scale-down;
+}
+.l-wrap {
+max-width: 1140px;
+margin-right: auto;
+margin-left: auto;
+}
+.postimage {
+            height: 225px;
+            width: 225px;
+            -o-object-fit: contain;
+             object-fit: scale-down;
+        }
+.three-col-grid .grid-item {
+width: 380px;
+float: left;
+}
+
+</style>
+<div class="container-fluid">
+    <div class="l-wrap">
+            <div class="three-col-grid">
+                    {% for post in posts %}
+                        <span class="postimage"><a href="{% url 'post' pk=post.pid %}"><img class="postimage" src="{{ post.post_picture.url }}" /></a></span>
+                        {% if forloop.counter|divisibleby:3 %}<br /><hr>{% endif %}
+                        
+                    {% endfor %}
+            </div>
+    </div>
+</div>
+{% endblock %}

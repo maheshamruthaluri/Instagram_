@@ -1,0 +1,27 @@
+{% extends 'base_app/base.html' %}
+
+{% block content %}
+<style>
+    img {
+        height: 500px;
+        width: 700px;
+    }
+</style>
+    <div class="post">
+        <img src="{{ post.post_picture.url }}" />
+    </div>
+    <p>posted: {{ post.published_date }} by {{ post.user.name }}</p>
+    <p>{{ post.description }}</p>
+    {% if post.likes == 1 %}
+        <p>{{ post.likes }} like</p>
+    {% else %}
+        <p>{{ post.likes }} likes</p>
+    {% endif %}
+    {% for comment in comments %}
+        <p>{{ comment.text }}&emsp;&emsp;[{{ comment.user.name }}]</p>
+    {% endfor %}
+    <!--<a href="#" class="button black" onclick="goBack()" style="text-decoration: none">back</a><script>function goBack(){window.history.back();}</script>-->
+<a class="button black" href="../../profile" style="text-decoration: none">profile</a>
+<a class="button black" href="../../feed" style="text-decoration: none">feed</a>
+<a class="button black" href="{% url 'comment' pk=post.pid %}" style="text-decoration: none">comment</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base_app/base.html' %}
+
+{% block content %}
+    <h2>Login</h2>
+    <form method="POST" class="edit-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+<a class="button black" href="{% url 'profile' %}" style="text-decoration: none">profile</a>
+    <!--<a href="#" class="button black" onclick="goBack()" style="text-decoration: none">signup</a>-->
+    <!--<script>function goBack(){window.history.back();}</script>-->
+{% endblock %}

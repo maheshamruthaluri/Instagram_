@@ -1,0 +1,16 @@
+{% extends 'base_app/base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+</head>
+<body>
+<h1>Upload</h1>
+<form method = 'post' class="upload" enctype="multipart/form-data">
+    {{form.as_p}} {% csrf_token %}
+    <button type="submit" class="submit">Post</button>
+</form>
+</body>
+<a href="#" class="button black" onclick="goBack()" style="text-decoration: none">cancel</a><script>function goBack(){window.history.back();}</script>
+{% endblock %}

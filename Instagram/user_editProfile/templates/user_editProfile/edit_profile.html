@@ -1,0 +1,10 @@
+{% extends 'base_app/base.html' %}
+
+{% block content %}
+    <h2>Edit profile</h2>
+    <form method="POST" class="edit-form" enctype="multipart/form-data">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    <a href="#" class="button black" onclick="goBack()" style="text-decoration: none">cancel</a><script>function goBack(){window.history.back();}</script>
+{% endblock %}
